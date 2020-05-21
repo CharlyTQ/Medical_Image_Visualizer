@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUI.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.2
+# Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.simple_view.setGeometry(QtCore.QRect(30, 60, 341, 431))
         self.simple_view.setObjectName("simple_view")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(680, 70, 87, 65))
+        self.layoutWidget.setGeometry(QtCore.QRect(680, 70, 118, 83))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -66,6 +66,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.filter_Enable)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem)
+        self.reset_Button = QtWidgets.QPushButton(self.layoutWidget1)
+        self.reset_Button.setObjectName("reset_Button")
+        self.horizontalLayout_5.addWidget(self.reset_Button)
         self.verticalLayout_2.addLayout(self.horizontalLayout_5)
         self.filter_Group = QtWidgets.QGroupBox(self.layoutWidget1)
         self.filter_Group.setObjectName("filter_Group")
@@ -130,7 +133,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addLayout(self.verticalLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 923, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 923, 22))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -156,6 +159,7 @@ class Ui_MainWindow(object):
         self.sag_Button.setText(_translate("MainWindow", "Sagittal View"))
         self.cor_Button.setText(_translate("MainWindow", "Coronal View"))
         self.filter_Enable.setText(_translate("MainWindow", "Apply Filters"))
+        self.reset_Button.setText(_translate("MainWindow", "Reset"))
         self.filter_Group.setTitle(_translate("MainWindow", "Filters"))
         self.blur_Button.setText(_translate("MainWindow", "Bluring"))
         self.gauss_Button.setText(_translate("MainWindow", "Gaussian"))

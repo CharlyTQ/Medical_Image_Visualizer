@@ -39,6 +39,7 @@ class MainFramework(QMainWindow,Ui_MainWindow):
 		self.ax_Button.clicked.connect(lambda: self.changeView())
 		self.sag_Button.clicked.connect(lambda: self.changeView())
 		self.cor_Button.clicked.connect(lambda: self.changeView())
+		self.reset_Button.clicked.connect(lambda: self.resetImg())
 
 		#Filter Menu Interaction
 		self.filter_Enable.clicked.connect(lambda: self.enableFilter())
@@ -98,6 +99,17 @@ class MainFramework(QMainWindow,Ui_MainWindow):
 		self.spinBox.setValue(0)
 		self.filter_Group.setEnabled(False)
 		self.ax_Button.toggle()
+
+	def resetImg(self):
+		self.gauss_Button.setAutoExclusive(False)
+		self.blur_Button.setAutoExclusive(False)
+		self.gauss_Button.setChecked(False)
+		self.blur_Button.setChecked(False)
+		self.filter_Group.setEnabled(False)
+		self.gauss_Button.setAutoExclusive(True)
+		self.blur_Button.setAutoExclusive(True)
+		
+		self.refreshPlot()
 
 	def changeSpinBox(self):
 		if self.nii_file:
