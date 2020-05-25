@@ -6,37 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>642</width>
+    <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="vtk_Frame">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>39</y>
-      <width>561</width>
-      <height>491</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-   </widget>
    <widget class="QFrame" name="utility_Frame">
     <property name="geometry">
      <rect>
-      <x>9</x>
+      <x>10</x>
       <y>40</y>
-      <width>201</width>
-      <height>491</height>
+      <width>191</width>
+      <height>401</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -45,50 +29,12 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QComboBox" name="view_Box">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>151</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <item>
-      <property name="text">
-       <string>Points</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Wireframe</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Surface</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
-       <width>112</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>RadioButton</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>130</y>
-       <width>201</width>
+       <y>10</y>
+       <width>171</width>
        <height>381</height>
       </rect>
      </property>
@@ -105,6 +51,13 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBox">
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QSlider" name="res_Slider">
@@ -129,17 +82,99 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QLabel" name="dir_Label">
+   <widget class="QFrame" name="vtk_Frame">
     <property name="geometry">
      <rect>
-      <x>16</x>
-      <y>10</y>
-      <width>761</width>
+      <x>220</x>
+      <y>40</y>
+      <width>400</width>
+      <height>400</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>CrossCursor</cursorShape>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>2</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout"/>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>450</y>
+      <width>401</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>View Selection</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>30</y>
+       <width>381</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QRadioButton" name="ax_Button">
+        <property name="text">
+         <string>Axial</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="cor_Button">
+        <property name="text">
+         <string>Coronal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="sag_Button">
+        <property name="text">
+         <string>Sagittal</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>141</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>File Path:</string>
+     <string>Slice</string>
     </property>
    </widget>
   </widget>
@@ -148,18 +183,27 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>642</width>
      <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOpen_File">
     <property name="title">
-     <string>Open File</string>
+     <string>File</string>
     </property>
+    <addaction name="actionOpen_File"/>
    </widget>
    <addaction name="menuOpen_File"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen_File">
+   <property name="text">
+    <string>Open File</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

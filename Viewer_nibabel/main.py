@@ -7,7 +7,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from GUI import Ui_MainWindow
 # Import mip for my own medical image processing functions and class(es)
 from mip import niireader
-#from Filter import img_filtering
 
 
 class MainFramework(QMainWindow,Ui_MainWindow):
@@ -62,8 +61,6 @@ class MainFramework(QMainWindow,Ui_MainWindow):
 		if file_dialog.exec_() == file_dialog.Accepted:
 			file_path = file_dialog.selectedFiles()[0]
 
-			self.label_1.setText("File Path: " + file_path)
-			self.label_1.adjustSize()
 			self.nii_file = niireader(file_path)
 			self.spinBox.setEnabled(True)
 			self.refreshPlot()
