@@ -45,56 +45,46 @@ class MainFramework(QMainWindow,Ui_MainWindow):
         self.iren.SetInteractorStyle(style)
 
     def open_File(self):
-        path = os.path.join(os.path.dirname(sys.argv[0]))
-        file_dialog = QFileDialog(self,"Open File",path,"Naïve Image Formats (*.nii *.nii.gz)")
-        file_dialog.setAcceptMode(QFileDialog.AcceptOpen)
-        file_dialog.setFileMode(QFileDialog.ExistingFiles)
+   
+        self.reader = vtk.vtkNIFTIImageReader()
+        self.reader.SetFileName('brain1.nii')
+        self.reader.Update()
 
-        if file_dialog.exec_() == file_dialog.Accepted:
-            self.reader = vtk.vtkNIFTIImageReader()
-            self.reader.SetFileName('brain1.nii')
-            self.reader.Update()
-            self.path_Label.setText('File Name: brain1')
-            self.path_Label.adjustSize()
+        #Data Processing
+        self.size = self.reader.GetOutput().GetDimensions()
+        center = self.reader.GetOutput().GetCenter()
+        spacing = self.reader.GetOutput().GetSpacing()
+        print('size:' + str(self.size))
+        print('center:' + str(center))
 
-            #Data Processing
-            self.size = self.reader.GetOutput().GetDimensions()
-            center = self.reader.GetOutput().GetCenter()
-            spacing = self.reader.GetOutput().GetSpacing()
-            print('size:' + str(self.size))
-            print('center:' + str(center))
+        self.center_cam = (center[0], center[1], center[2])
 
-            self.center_cam = (center[0], center[1], center[2])
+        #Get graysacle Range
+        vrange = self.reader.GetOutput().GetScalarRange()
 
-            #Get graysacle Range
-            vrange = self.reader.GetOutput().GetScalarRange()
+        #Set Image Slicer Mappers for each view
 
-            #Set Image Slicer Mappers for each view
+        self.map = vtk.vtkImageSliceMapper()
+        self.map.BorderOn()
+        self.map.SliceAtFocalPointOn()
+        self.map.SliceFacesCameraOn()
+        self.map.SetInputConnection(self.reader.GetOutputPort())
 
-            self.map = vtk.vtkImageSliceMapper()
-            self.map.BorderOn()
-            self.map.SliceAtFocalPointOn()
-            self.map.SliceFacesCameraOn()
-            self.map.SetInputConnection(self.reader.GetOutputPort())
+        self.slice = vtk.vtkImageSlice()
+        self.slice.SetMapper(self.map)
+        self.slice.GetProperty().SetColorWindow(vrange[1]-vrange[0])
+        self.slice.GetProperty().SetColorLevel(0.5*(vrange[0]+vrange[1]))
 
-            self.slice = vtk.vtkImageSlice()
-            self.slice.SetMapper(self.map)
-            self.slice.GetProperty().SetColorWindow(vrange[1]-vrange[0])
-            self.slice.GetProperty().SetColorLevel(0.5*(vrange[0]+vrange[1]))
+        self.ren.AddActor(self.slice)
 
-            self.ren.AddActor(self.slice)
+        self.cam = self.ren.GetActiveCamera()
+        self.cam.ParallelProjectionOn()
+        self.cam.SetParallelScale(0.5*spacing[1]*self.size[1])
+        self.cam.SetFocalPoint(self.center_cam[0], self.center_cam[1], self.center_cam[2])
+        print(self.center_cam)
 
-            self.cam = self.ren.GetActiveCamera()
-            self.cam.ParallelProjectionOn()
-            self.cam.SetParallelScale(0.5*spacing[1]*self.size[1])
-            self.cam.SetFocalPoint(self.center_cam[0], self.center_cam[1], self.center_cam[2])
-            print(self.center_cam)
-
-            self.changeView()
-            self.spinBox.setEnabled(True)
-
-        else:
-            print("Operation Failed")
+        self.changeView()
+        self.spinBox.setEnabled(True)
 
     def valuechange(self):
         s = self.res_Slider.value()
